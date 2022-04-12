@@ -2,19 +2,24 @@ package hello.core;
 
 import hello.core.member.Grade;
 import hello.core.member.Member;
-import hello.core.member.MemberSerive;
-import hello.core.member.MemberServiceImpl;
+import hello.core.member.MemberService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-        MemberSerive memberSerive = appConfig.memberSerive();
-//        MemberSerive memberSerive = new MemberServiceImpl();
-        Member member = new Member(1L, "memberA", Grade.VIP);
-        memberSerive.join(member);
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberSerive();
+//        MemberService memberService = new MemberServiceImpl();
 
-        Member findMember = memberSerive.findMember(1L);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+
+        Member member = new Member(1L, "memberA", Grade.VIP);
+        memberService.join(member);
+
+        Member findMember = memberService.findMember(1L);
         System.out.println("member = " + member.getName());
         System.out.println("findMember = " + findMember.getName());
     }

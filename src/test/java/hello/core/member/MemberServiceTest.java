@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
 
-    MemberSerive memberSerive;
+    MemberService memberSerive;
 
     @BeforeEach
     public void beforeEach() {
